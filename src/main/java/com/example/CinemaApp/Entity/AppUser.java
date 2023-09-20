@@ -14,15 +14,25 @@ import java.util.Set;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
+@Table(name = "users_info",schema = "cinema_app")
 public class AppUser {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique = true)
     private String email;
 
+    @Column(nullable = false)
     private String password;
 
-    List<TicketDto> tickets;
+    @Column(nullable = false)
+    private String name;
+
+    @OneToMany(mappedBy = "user")
+    List<Ticket> tickets;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_roles" ,

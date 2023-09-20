@@ -6,19 +6,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Date;
+
 
 @Setter
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class TicketDto {
-
-    private Long id;
-
-    private String movieName;
-
-    private Long theaterId;
+public class TicketSimpleDto extends TicketDto {
 
     private SeatType seatType;
 
@@ -28,16 +22,10 @@ public class TicketDto {
 
     private double price;
 
-    private Date date;
-
-    public TicketDto(Ticket ticket){
-        this.id = ticket.getId();
-        this.movieName = ticket.getTheater().getMovie().getName();
-        this.theaterId = ticket.getTheater().getId();
+    public TicketSimpleDto(Ticket ticket){
+        this.seatType = ticket.getSeatType();
         this.row = ticket.getRowNo();
         this.column = ticket.getColumnNo();
-        this.date = ticket.getTheater().getMovie().getShowDate();
         this.price = ticket.getPrice();
-
     }
 }

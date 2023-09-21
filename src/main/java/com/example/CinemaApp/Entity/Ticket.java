@@ -28,7 +28,7 @@ public class Ticket {
     private SeatType seatType;
 
     @ManyToOne()
-    @JoinColumn(name="theater_id", nullable=false ,referencedColumnName = "id")
+    @JoinColumn(name="theater_id",referencedColumnName = "id")
     private Theater theater;
 
     @Column(nullable = false)
@@ -42,4 +42,10 @@ public class Ticket {
 
     private boolean isReserved;
 
+    public Ticket(SeatType seatType, int rowNo, int columnNo, double price) {
+        this.seatType = seatType;
+        this.rowNo = rowNo;
+        this.columnNo = columnNo;
+        this.price = price;
+    }
 }

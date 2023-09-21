@@ -20,6 +20,6 @@ public class Cinema {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(cascade =CascadeType.ALL)
+    @OneToMany(mappedBy = "cinema")
     private List<Theater> theaters;
 }

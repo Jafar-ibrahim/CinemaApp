@@ -26,6 +26,10 @@ public class Theater {
     @JoinColumn(name = "movie_name" , referencedColumnName = "name")
     private Movie movie;
 
+    @ManyToOne
+    @JoinColumn(name = "cinema")
+    private Cinema cinema;
+
     @OneToMany(mappedBy = "theater")
     private List<Ticket> tickets;
 

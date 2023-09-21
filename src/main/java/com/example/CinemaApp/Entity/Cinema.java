@@ -20,6 +20,8 @@ public class Cinema {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String name;
+
     @OneToMany(mappedBy = "cinema")
     private List<Theater> theaters;
 }

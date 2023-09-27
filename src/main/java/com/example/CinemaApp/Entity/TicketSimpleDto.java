@@ -12,13 +12,13 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class TicketSimpleDto extends TicketDto {
-
-    private SeatType seatType;
+public class TicketSimpleDto  {
 
     private int row;
 
     private int column;
+
+    private SeatType seatType;
 
     private double price;
 

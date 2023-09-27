@@ -6,7 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Date;
+import java.time.LocalDateTime;
+
 
 @Setter
 @Getter
@@ -28,16 +29,31 @@ public class TicketDto {
 
     private double price;
 
-    private Date date;
+    private LocalDateTime date;
 
     public TicketDto(Ticket ticket){
         this.id = ticket.getId();
-        this.movieName = ticket.getTheater().getMovie().getName();
+        this.movieName = ticket.getMovieName();
+        this.seatType = ticket.getSeatType();
         this.theaterId = ticket.getTheater().getId();
         this.row = ticket.getRowNo();
         this.column = ticket.getColumnNo();
-        this.date = ticket.getTheater().getMovie().getShowDate();
+        this.date = ticket.getTheater().getMovie().getShowTime();
         this.price = ticket.getPrice();
 
+    }
+
+    @Override
+    public String toString() {
+        return "TicketDto{" +
+                "id=" + id +
+                ", movieName='" + movieName + '\'' +
+                ", theaterId=" + theaterId +
+                ", seatType=" + seatType +
+                ", row=" + row +
+                ", column=" + column +
+                ", price=" + price +
+                ", date=" + date +
+                '}';
     }
 }

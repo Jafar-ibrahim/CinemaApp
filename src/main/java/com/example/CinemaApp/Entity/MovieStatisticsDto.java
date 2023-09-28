@@ -11,7 +11,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class MovieStatisticsDto {
 
-    private int numberOfPurchasedTickets;
-    private double currentIncome;
-    private double maxIncome;
+    private Long numberOfPurchasedTickets;
+    private Double currentIncome;
+    private Double maxIncome;
 }

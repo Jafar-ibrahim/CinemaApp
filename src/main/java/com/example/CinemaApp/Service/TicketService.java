@@ -2,9 +2,7 @@ package com.example.CinemaApp.Service;
 
 import com.example.CinemaApp.Entity.*;
 import com.example.CinemaApp.Enum.SeatType;
-import com.example.CinemaApp.Exception.InvalidRowOrColumnException;
-import com.example.CinemaApp.Exception.TicketNotReservedException;
-import com.example.CinemaApp.Exception.TicketReservedException;
+import com.example.CinemaApp.Exception.*;
 import com.example.CinemaApp.Repository.TicketRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,8 +21,8 @@ public class TicketService {
     TicketRepo ticketRepo;
     @Autowired
     UserService userService;
-    @Autowired
-    MovieService movieService;
+    //@Autowired
+    //MovieService movieService;
     @Autowired
     TheaterService theaterService;
 
@@ -41,11 +39,16 @@ public class TicketService {
         return ticketRepo.findById(id).orElse(null);
     }
 
+    public void verifyBeforeInitialization(Theater theater){
+        if(theater.getMovie() == null)
+            throw new TheaterHasNoMovieException();
+        if (!theater.getTickets().isEmpty())
+            throw new TicketsAlreadyInitializedException();
+    }
 
     public void initializeTickets(Theater theater){
 
-        if(theater.getMovie() == null)
-            throw new RuntimeException("Can't initialize tickets for a theater that has no movie to show !!");
+        verifyBeforeInitialization(theater);
 
         List<Ticket> tickets = new ArrayList<>();
         SeatType seatType = SeatType.PREMIUM;
@@ -59,6 +62,11 @@ public class TicketService {
             }
         }
         theater.setTickets(tickets);
+    }
+
+    public void deleteTickets(Theater theater){
+        List<Ticket> tickets = theater.getTickets();
+        ticketRepo.deleteAll(tickets);
     }
     public Ticket findByRowNoAndColumnNoAndTheater_Id(int row , int col , Long theaterId) {
 
@@ -76,7 +84,7 @@ public class TicketService {
         return ticketRepo.findAllByReservedFalse();
     }
 
-    public double sumPriceByMovieName(String movieName){
+    public Double sumPriceByMovieName(String movieName){
         return ticketRepo.sumPriceByMovieName(movieName);
     }
 
@@ -124,7 +132,7 @@ public class TicketService {
         Movie movie = theater.getMovie();
         movie.addToCurrentIncome(ticket.getPrice());
         movie.incrementNumberOfPurchasedTickets();
-        movieService.save(movie);
+        //movieService.save(movie);
 
         theater.increaseReservationCounter();
         theaterService.save(theater);
@@ -161,12 +169,20 @@ public class TicketService {
         movie.addToCurrentIncome(-1 * ticket.getPrice());
         movie.decrementNumberOfPurchasedTickets();
 
-        movieService.save(movie);
+        //movieService.save(movie);
         theaterService.save(theater);
         save(ticket);
 
         System.out.println("reservation deleted successfully !!!!!!");
 
+    }
+
+    public Long countReservedTickets(String movieName){
+        return ticketRepo.countReservedTickets(movieName);
+    }
+
+    public Double sumReservedTicketPrices(String movieName){
+        return ticketRepo.sumReservedTicketPrices(movieName);
     }
 
 

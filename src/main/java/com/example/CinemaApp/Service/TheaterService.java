@@ -1,6 +1,7 @@
 package com.example.CinemaApp.Service;
 
 import com.example.CinemaApp.Entity.*;
+import com.example.CinemaApp.Exception.TheaterHasTicketsException;
 import com.example.CinemaApp.Exception.TheaterIsFullException;
 import com.example.CinemaApp.Repository.TheaterRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +18,6 @@ public class TheaterService {
     TheaterRepo theaterRepo;
     @Autowired
     MovieService movieService;
-
-
-
 
 
     public Theater save(Theater theater){
@@ -76,7 +74,11 @@ public class TheaterService {
 
 
     public TheaterDto setTheater(Long theaterId , String movieName , int rows, int columns) {
+
         Theater theater = findById(theaterId);
+        if (!theater.getTickets().isEmpty())
+            throw new TheaterHasTicketsException();
+
         Movie movie = movieService.getMovieByName(movieName);
 
         theater.setRowsNumber(rows);

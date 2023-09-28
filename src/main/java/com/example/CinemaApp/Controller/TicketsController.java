@@ -23,6 +23,17 @@ public class TicketsController {
     public List<TicketSimpleDto> getTheaterTickets(@PathVariable Long theaterId){
         return ticketService.getTheaterTickets(theaterService.findById(theaterId));
     }
+
+    @PutMapping
+    public void initializeTickets(@PathVariable Long theaterId){
+        ticketService.initializeTickets(theaterService.findById(theaterId));
+    }
+
+    @DeleteMapping
+    public void DeleteTickets(@PathVariable Long theaterId){
+        ticketService.deleteTickets(theaterService.findById(theaterId));
+    }
+
     @PatchMapping("/reservation")
     @ResponseBody
     public TicketDto reserveTicket(@PathVariable Long theaterId,int row , int col ){
@@ -35,19 +46,12 @@ public class TicketsController {
          ticketService.cancelTicketReservation(theaterId, row, col);
     }
 
-    @PutMapping("/init")
-    public void initializeTicket(@PathVariable Long theaterId){
-        ticketService.initializeTickets(theaterService.findById(theaterId));
-    }
+
 
     @GetMapping("/price")
     @ResponseBody
     public TicketSimpleDto getTicketPrice(int row, int col , @PathVariable Long theaterId){
         return ticketService.getPrice(row, col, theaterId);
     }
-
-
-
-
 
 }

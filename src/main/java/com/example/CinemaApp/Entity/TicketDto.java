@@ -29,7 +29,10 @@ public class TicketDto {
 
     private double price;
 
-    private LocalDateTime date;
+    private LocalDateTime showDate;
+
+    private LocalDateTime PurchaseDate;
+
 
     public TicketDto(Ticket ticket){
         this.id = ticket.getId();
@@ -38,22 +41,9 @@ public class TicketDto {
         this.theaterId = ticket.getTheater().getId();
         this.row = ticket.getRowNo();
         this.column = ticket.getColumnNo();
-        this.date = ticket.getTheater().getMovie().getShowTime();
+        this.showDate = ticket.getTheater().getMovie().getShowTime();
+        this.PurchaseDate = ticket.getDateOfPurchase();
         this.price = ticket.getPrice();
 
-    }
-
-    @Override
-    public String toString() {
-        return "TicketDto{" +
-                "id=" + id +
-                ", movieName='" + movieName + '\'' +
-                ", theaterId=" + theaterId +
-                ", seatType=" + seatType +
-                ", row=" + row +
-                ", column=" + column +
-                ", price=" + price +
-                ", date=" + date +
-                '}';
     }
 }

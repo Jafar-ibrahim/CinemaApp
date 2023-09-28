@@ -28,7 +28,7 @@ public class Theater {
     @JoinColumn(name = "cinema", referencedColumnName = "name")
     private Cinema cinema;
 
-    @OneToMany(mappedBy = "theater")
+    @OneToMany(mappedBy = "theater" , cascade = CascadeType.MERGE)
     private List<Ticket> tickets;
 
     private int rowsNumber = 8;

@@ -3,6 +3,7 @@ package com.example.CinemaApp.Service;
 import com.example.CinemaApp.Entity.*;
 import com.example.CinemaApp.Repository.MovieRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
@@ -15,8 +16,6 @@ public class MovieService {
 
     @Autowired
     MovieRepo movieRepo;
-    @Autowired
-    TicketService ticketService;
 
     public Movie save(Movie movie){
         return movieRepo.save(movie);
@@ -68,27 +67,5 @@ public class MovieService {
 
         return new MovieDto(target);
     }
-
-
-
-
-    public MovieStatisticsDto getStatistics(Long MovieId){
-        Movie movie = getMovieById(MovieId);
-
-        int numberOfPurchasedTickets = movie.getNumberOfPurchasedTickets();
-        double currentIncome = movie.getCurrentIncome();
-        double maxIncome = ticketService.sumPriceByMovieName(movie.getName());
-
-        return new MovieStatisticsDto(numberOfPurchasedTickets,currentIncome,maxIncome);
-    }
-
-    public DailySalesReportDto getDailySalesReport(Long id){
-    String movieName = getMovieById(id).getName();
-    Double totalSales = ticketService.sumPriceByMovieNameAndToday(movieName);
-    if (totalSales == null)
-        totalSales = 0d;
-    return new DailySalesReportDto(movieName,totalSales);
-    }
-
 
 }

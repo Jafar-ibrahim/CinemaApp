@@ -46,15 +46,5 @@ public class MovieController {
         return movieService.setMovieShowtime(id,showTime);
     }
 
-    @GetMapping("/{id}/statistics")
-    @ResponseBody
-    public MovieStatisticsDto getStatistics(@PathVariable Long id){
-        return movieService.getStatistics(id);
-    }
 
-    @GetMapping("/{id}/daily-sales")
-    @ResponseBody
-    public DailySalesReportDto getDailySalesReport(@PathVariable Long id){
-        return movieService.getDailySalesReport(id);
-    }
 }

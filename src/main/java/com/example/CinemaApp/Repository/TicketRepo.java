@@ -19,10 +19,16 @@ public interface TicketRepo extends JpaRepository<Ticket,Long> {
     Optional<Ticket> findByRowNoAndColumnNoAndTheater_Id(int row , int col , Long theaterId);
 
     @Query(value = "SELECT SUM(price) FROM tickets WHERE movie_name = :movieName", nativeQuery = true)
-    double sumPriceByMovieName(@Param("movieName") String movieName);
+    Double sumPriceByMovieName(@Param("movieName") String movieName);
 
     @Query(value = "SELECT SUM(price) FROM tickets WHERE DATE(date_of_purchase) = CURRENT_DATE AND movie_name = :movieName", nativeQuery = true)
     Double sumPriceByMovieNameAndToday(@Param("movieName") String movieName);
+
+    @Query(value = "SELECT COUNT(*) FROM tickets WHERE reserved = true AND movie_name = :movieName", nativeQuery = true)
+    Long countReservedTickets(@Param("movieName") String movieName);
+
+    @Query(value = "SELECT SUM(price) FROM tickets WHERE reserved = true AND movie_name = :movieName", nativeQuery = true)
+    Double sumReservedTicketPrices(@Param("movieName") String movieName);
 
 
 }

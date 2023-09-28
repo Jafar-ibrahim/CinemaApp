@@ -24,19 +24,12 @@ public class Theater {
     @JoinColumn(name = "movie_name" , referencedColumnName = "name")
     private Movie movie;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "cinema", referencedColumnName = "name")
-    private Cinema cinema;
-
     @OneToMany(mappedBy = "theater" , cascade = CascadeType.MERGE)
     private List<Ticket> tickets;
 
     private int rowsNumber = 8;
 
     private int columnsNumber = 8;
-
-    //public int MAX_CAPACITY = this.rowsNumber * this.columnsNumber;
-
 
     private int reservationCounter = 0;
 

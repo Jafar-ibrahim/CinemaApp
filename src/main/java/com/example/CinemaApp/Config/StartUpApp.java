@@ -12,9 +12,9 @@ import java.util.*;
 @Component
 @RequiredArgsConstructor
 public class StartUpApp implements CommandLineRunner {
+
     private final UserService userService;
     private final RoleService roleService;
-    private final CinemaService cinemaService;
     private final TheaterService theaterService;
     private final MovieService movieService;
     private final TicketService ticketService;
@@ -39,9 +39,6 @@ public class StartUpApp implements CommandLineRunner {
         empRoles.add(roleService.findByName("employee"));
 
 
-        if(cinemaService.findAll().isEmpty()){
-           cinemaService.save(new Cinema("Screen Haven"));
-        }
         if (userService.findAll().isEmpty()) {
             userService.save(new AppUser(null,"jafar@gmail.com","123","Jafar",null,adminRoles,true,true,true,true));
         }
@@ -64,7 +61,7 @@ public class StartUpApp implements CommandLineRunner {
             theaters.add(theaterService.save(new Theater(movieService.getMovieByName("Demon Slayer"),8,8)));
         }
         if(ticketService.findAll().isEmpty()){
-            theaterService.findAll().forEach(x->{
+            theaters.forEach(x->{
                 if (x.getMovie() !=null)
                     ticketService.initializeTickets(x);});
         }

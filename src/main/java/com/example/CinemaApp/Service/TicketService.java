@@ -6,6 +6,7 @@ import com.example.CinemaApp.Exception.*;
 import com.example.CinemaApp.Repository.TicketRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
@@ -21,8 +22,6 @@ public class TicketService {
     TicketRepo ticketRepo;
     @Autowired
     UserService userService;
-    //@Autowired
-    //MovieService movieService;
     @Autowired
     TheaterService theaterService;
 
@@ -42,7 +41,7 @@ public class TicketService {
     public void verifyBeforeInitialization(Theater theater){
         if(theater.getMovie() == null)
             throw new TheaterHasNoMovieException();
-        if (!theater.getTickets().isEmpty())
+        if (theater.getTickets()!=null && !theater.getTickets().isEmpty())
             throw new TicketsAlreadyInitializedException();
     }
 
@@ -120,25 +119,23 @@ public class TicketService {
             throw new TicketReservedException();
 
         ticket.setReserved(true);
+
         // adding the ticket to the user's list of tickets
-        // temporary line ( need to implement security first)
-        ticket.setUser(userService.findById(1L));
+        AppUser user = userService.getCurrentUser();
+        ticket.setUser(user);
+
         // adding date of purchase
         ticket.setDateOfPurchase(LocalDateTime.now());
-        save(ticket);
+        //save(ticket);
 
         // adding the ticket price to the movie revenue and increasing
         // number of purchased tickets
         Movie movie = theater.getMovie();
         movie.addToCurrentIncome(ticket.getPrice());
         movie.incrementNumberOfPurchasedTickets();
-        //movieService.save(movie);
 
         theater.increaseReservationCounter();
         theaterService.save(theater);
-
-
-        System.out.println("reservation completed successfully !!!!!!");
 
         return new TicketDto(ticket);
     }
@@ -158,22 +155,19 @@ public class TicketService {
         theater.decreaseReservationCounter();
 
         // removing the ticket from the user's list of tickets
-        // temporary line
         ticket.setUser(null);
         // removing date of purchase
         ticket.setDateOfPurchase(null);
+        save(ticket);
 
+
+        // removing the ticket price from the movie revenue and decreasing
+        // number of purchased tickets
         Movie movie = theater.getMovie();
-        //removing the ticket price from the movie revenue and decreasing
-        //number of purchased tickets
         movie.addToCurrentIncome(-1 * ticket.getPrice());
         movie.decrementNumberOfPurchasedTickets();
 
-        //movieService.save(movie);
         theaterService.save(theater);
-        save(ticket);
-
-        System.out.println("reservation deleted successfully !!!!!!");
 
     }
 
@@ -184,6 +178,7 @@ public class TicketService {
     public Double sumReservedTicketPrices(String movieName){
         return ticketRepo.sumReservedTicketPrices(movieName);
     }
+
 
 
 }

@@ -51,6 +51,8 @@ public class Ticket {
 
     private boolean reserved;
 
+    //Just to not have any decimals in the seconds
+    @Column(columnDefinition = "TIMESTAMP(0)")
     private LocalDateTime dateOfPurchase;
 
     public Ticket(SeatType seatType, int rowNo, int columnNo, double price) {

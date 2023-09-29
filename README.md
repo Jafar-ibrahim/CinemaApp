@@ -33,8 +33,6 @@
    - [Get Ticket Price](#6-get-ticket-price)
 7. [Security](#security)
 8. [Getting Started](#getting-started)
-9. [Contributions](#contributions)
-10. [License](#license)
 
 
 ## Overview

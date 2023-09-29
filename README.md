@@ -312,7 +312,7 @@ Authentication and authorization in the CinemaApp are implemented using JSON Web
 4. Create users and movies as needed using the aprropriate endpoints.
 5. Create a Theater.
 6. Set the theater ( Movie , rowNumber , colNumber ).
-7. initialize tickets for your theater.
+7. Initialize tickets for your theater.
 8. Now you can start reserving the tickets of this theater. 
 
 ## Contributions

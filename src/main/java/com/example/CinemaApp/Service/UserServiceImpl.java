@@ -57,6 +57,7 @@ public class UserServiceImpl implements UserService , UserDetailsService {
         return userRepo.findById(id).orElse(null);
     }
 
+    //Get the currently authenticated user.
     public AppUser getCurrentUser(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 

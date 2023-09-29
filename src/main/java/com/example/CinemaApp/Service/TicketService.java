@@ -37,6 +37,7 @@ public class TicketService {
         return ticketRepo.findById(id).orElse(null);
     }
 
+    // Verify if a theater is eligible for ticket initialization.
     public void verifyBeforeInitialization(Theater theater){
         if(theater.getMovie() == null)
             throw new TheaterHasNoMovieException();

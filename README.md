@@ -4,6 +4,123 @@
 
 CinemaApp is a Spring Boot application that manages cinema-related operations, including user authentication, movie and theater management, ticket reservations, and reporting. This document provides an overview of the available endpoints and their functionalities.
 
+## Table of Contents
+1. [Overview](#overview)
+2. [User Controller](#user-controller)
+   - [Get User Profile](#1-get-user-profile)
+   - [Get User Tickets](#2-get-user-tickets)
+   - [Reserve Ticket](#3-reserve-ticket)
+   - [Cancel Ticket Reservation](#4-cancel-ticket-reservation)
+   - [Get Ticket Price](#5-get-ticket-price)
+3. [Movie Controller](#movie-controller)
+   - [Add Movie](#1-add-movie)
+   - [Get Movie by ID](#2-get-movie-by-id)
+   - [Get All Movies](#3-get-all-movies)
+   - [Delete Movie by ID](#4-delete-movie-by-id)
+   - [Set Movie Showtime](#5-set-movie-showtime)
+4. [Reporting Controller](#reporting-controller)
+   - [Get Movie Statistics](#1-get-movie-statistics)
+   - [Get Daily Sales Report](#2-get-daily-sales-report)
+5. [Theater Controller](#theater-controller)
+   - [Add Theater](#1-add-theater)
+   - [Get Theater by ID](#2-get-theater-by-id)
+   - [Get All Theaters](#3-get-all-theaters)
+   - [Delete Theater by ID](#4-delete-theater-by-id)
+   - [Set Theater Details](#5-set-theater-details)
+   - [Get Theater Reservations Board](#6-get-theater-reservations-board)
+6. [Tickets Controller](#tickets-controller)
+   - [Get Theater Tickets](#1-get-theater-tickets)
+   - [Initialize Tickets](#2-initialize-tickets)
+   - [Delete Tickets](#3-delete-tickets)
+   - [Admin Reserve Ticket](#4-admin-reserve-ticket)
+   - [Cancel Ticket Reservation](#5-cancel-ticket-reservation)
+   - [Get Ticket Price](#6-get-ticket-price)
+7. [Security](#security)
+8. [Getting Started](#getting-started)
+9. [Contributions](#contributions)
+10. [License](#license)
+
+## Overview
+CinemaApp is a Spring Boot application that manages cinema-related operations, including user authentication, movie and theater management, ticket reservations, and reporting. This document provides an overview of the available endpoints and their functionalities.
+
+## User Controller
+**Base URL:** `/cinema/user`
+
+### 1. Get User Profile
+   - **URL:** `/profile`
+   - **Method:** `GET`
+   - **Description:** Retrieve the profile information of the authenticated user.
+   - **Access Control:** Accessible by both users and admins.
+   - **Response Format:** JSON
+   - **Response Body:**
+     - `AppUserDto`: User profile information including username, email, and other details.
+
+### 2. Get User Tickets
+   - **URL:** `/tickets`
+   - **Method:** `GET`
+   - **Description:** Retrieve a list of tickets associated with the authenticated user.
+   - **Access Control:** Accessible by both users and admins.
+   - **Response Format:** JSON
+   - **Response Body:**
+     - List of `TicketDto`: User's ticket information including movie, theater, seat, and other details.
+
+### 3. Reserve Ticket
+   - **URL:** `/tickets/reservation`
+   - **Method:** `PATCH`
+   - **Description:** Reserve a ticket for a specific theater, row, and column.
+   - **Access Control:** Accessible by both users and admins.
+   - **Request Body:**
+     - `theaterId` (Long): Identifier of the theater for which the ticket is reserved.
+     - `row` (int): Row number for the reserved seat.
+     - `col` (int): Column number for the reserved seat.
+   - **Response Format:** JSON
+   - **Response Body:**
+     - `TicketDto`: Reserved ticket information including movie, theater, seat, and other details.
+
+### 4. Cancel Ticket Reservation
+   - **URL:** `/tickets/reservation`
+   - **Method:** `DELETE`
+   - **Description:** Cancel the reservation for a specific ticket.
+   - **Access Control:** Accessible by both users and admins.
+   - **Request Parameter:**
+     - `ticketId` (Long): Identifier of the ticket to be canceled.
+
+### 5. Get Ticket Price
+   - **URL:** `/tickets/price`
+   - **Method:** `GET`
+   - **Description:** Retrieve the price of a ticket for a specific theater and seat.
+   - **Access Control:** Accessible by both users and admins.
+   - **Request Parameters:**
+     - `theaterId` (Long): Identifier of the theater.
+     - `row` (int): Row number for the seat.
+     - `col` (int): Column number for the seat.
+   - **Response Format:** JSON
+   - **Response Body:**
+     - `TicketSimpleDto`: Ticket price information for the specified seat.
+
+## Movie Controller
+**Base URL:** `/cinema/movies`
+
+### 1. Add Movie
+   - **URL:** `/`
+   - **Method:** `POST`
+   - **Description:** Add a new movie to the system.
+   - **Access Control:** Accessible only by administrators (`ROLE_ADMIN`).
+   - **Response Format:** JSON
+   - **Response Body:**
+     - `MovieDto`: Details of the added movie, including title, description, and other attributes.
+
+### 2. Get Movie by ID
+   - **URL:** `/{id}`
+   - **Method:** `GET`
+   - **Description:** Retrieve details of a movie by its unique identifier.
+   - **Access Control:** Accessible by both users and administrators (`ROLE_USER`, `ROLE_ADMIN`).
+   - **Request Parameter:**
+     - `id` (Long): Identifier of the movie.
+   - **Response Format:** JSON
+   - **Response
+
+
 ## Endpoints
 
 ### User Controller

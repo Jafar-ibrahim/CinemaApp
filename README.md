@@ -34,7 +34,6 @@
 7. [Security](#security)
 8. [Getting Started](#getting-started)
 9. [Contributions](#contributions)
-10. [License](#license)
 
 ## Overview
 CinemaApp is a Spring Boot application that manages cinema-related operations, including user authentication, movie and theater management, ticket reservations, and reporting. This document provides an overview of the available endpoints and their functionalities.
@@ -304,15 +303,18 @@ CinemaApp is a Spring Boot application that manages cinema-related operations, i
      - `TicketSimpleDto`: Ticket price information for the specified seat.
 
 ## Security
-Authentication and authorization in the CinemaApp are implemented using JSON Web Tokens (JWT). Access to certain endpoints is restricted based on user roles (`ROLE_USER`, `ROLE_ADMIN`). Be sure to configure the appropriate security settings in your Spring Boot application.
+Authentication and authorization in the CinemaApp are implemented using JSON Web Tokens (JWT). Access to certain endpoints is restricted based on user roles (`ROLE_USER`, `ROLE_ADMIN`). 
 
 ## Getting Started
 1. Clone the repository: `git clone https://github.com/your-username/CinemaApp.git`
 2. Build and run the application: `./mvnw spring-boot:run`
 3. Access the application at `http://localhost:8080`
+4. Create users and movies as needed using the aprropriate endpoints.
+5. Create a Theater.
+6. Set the theater ( Movie , rowNumber , colNumber ).
+7. initialize tickets for your theater.
+8. Now you can start reserving the tickets of this theater. 
 
 ## Contributions
 Contributions are welcome! If you'd like to contribute to this project, please fork the repository and create a pull request with your changes.
 
-## License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

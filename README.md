@@ -378,18 +378,4 @@ CinemaApp is a Spring Boot application that manages cinema-related operations, i
 
 ## Security
 
-Authentication and authorization in the CinemaApp are implemented using JSON Web Tokens (JWT). Access to certain endpoints is restricted based on user roles (`ROLE_USER`, `ROLE_ADMIN`). Be sure to configure the appropriate security settings in your Spring Boot application.
-
-## Getting Started
-
-1. Clone the repository: `git clone https://github.com/your-username/CinemaApp.git`
-2. Build and run the application: `./mvnw spring-boot:run`
-3. Access the application at `http://localhost:8080`
-
-## Contributions
-
-Contributions are welcome! If you'd like to contribute to this project, please fork the repository and create a pull request with your changes.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+Authentication and authorization in the CinemaApp are implemented using JSON Web Tokens (JWT). Access to certain endpoints is restricted based on user roles (`ROLE_USER`, `ROLE_ADMIN`). 

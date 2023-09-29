@@ -1,9 +1,5 @@
 # CinemaApp Documentation
 
-## Overview
-
-CinemaApp is a Spring Boot application that manages cinema-related operations, including user authentication, movie and theater management, ticket reservations, and reporting. This document provides an overview of the available endpoints and their functionalities.
-
 ## Table of Contents
 1. [Overview](#overview)
 2. [User Controller](#user-controller)
@@ -39,6 +35,7 @@ CinemaApp is a Spring Boot application that manages cinema-related operations, i
 8. [Getting Started](#getting-started)
 9. [Contributions](#contributions)
 10. [License](#license)
+
 
 ## Overview
 CinemaApp is a Spring Boot application that manages cinema-related operations, including user authentication, movie and theater management, ticket reservations, and reporting. This document provides an overview of the available endpoints and their functionalities.

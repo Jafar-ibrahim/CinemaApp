@@ -2,7 +2,6 @@ package com.example.CinemaApp.Entity;
 
 import com.example.CinemaApp.Enum.SeatType;
 import com.example.CinemaApp.Service.TicketIdGenerator;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,6 +11,7 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+@SuppressWarnings("ALL")
 @Setter
 @Getter
 @NoArgsConstructor
@@ -54,13 +54,6 @@ public class Ticket {
     //Just to not have any decimals in the seconds
     @Column(columnDefinition = "TIMESTAMP(0)")
     private LocalDateTime dateOfPurchase;
-
-    public Ticket(SeatType seatType, int rowNo, int columnNo, double price) {
-        this.seatType = seatType;
-        this.rowNo = rowNo;
-        this.columnNo = columnNo;
-        this.price = price;
-    }
 
     public Ticket(SeatType seatType, Theater theater, int rowNo, int columnNo) {
         this.seatType = seatType;

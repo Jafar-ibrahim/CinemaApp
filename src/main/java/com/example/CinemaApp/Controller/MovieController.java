@@ -6,6 +6,7 @@ import com.example.CinemaApp.Entity.MovieDto;
 import com.example.CinemaApp.Entity.MovieStatisticsDto;
 import com.example.CinemaApp.Service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -18,28 +19,33 @@ public class MovieController {
     @Autowired
     MovieService movieService;
 
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @PostMapping
     public MovieDto addMovie(@RequestBody Movie movie){
         return movieService.addMovie(movie);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN')")
     @GetMapping("/{id}")
     @ResponseBody
     public MovieDto getMovie(@PathVariable Long id){
         return movieService.getMovie(id);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN')")
     @GetMapping
     @ResponseBody
     public List<MovieDto> getAllMovies(){
         return movieService.getAllMovies();
     }
 
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @DeleteMapping("/{id}")
     public void deleteMovie(@PathVariable Long id){
         movieService.deleteMovie(id);
     }
 
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @PutMapping("/{id}")
     public MovieDto setMovieShowtime(@PathVariable Long id,
                                      LocalDateTime showTime){

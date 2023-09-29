@@ -14,6 +14,8 @@ import lombok.Setter;
 @AllArgsConstructor
 public class TicketSimpleDto  {
 
+    private Long theater;
+
     private int row;
 
     private int column;
@@ -23,6 +25,7 @@ public class TicketSimpleDto  {
     private double price;
 
     public TicketSimpleDto(Ticket ticket){
+        this.theater = ticket.getTheater().getId();
         this.seatType = ticket.getSeatType();
         this.row = ticket.getRowNo();
         this.column = ticket.getColumnNo();

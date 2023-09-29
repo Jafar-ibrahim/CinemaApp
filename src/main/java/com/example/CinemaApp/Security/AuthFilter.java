@@ -9,12 +9,15 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.web.filter.OncePerRequestFilter;
+import org.springframework.security.core.GrantedAuthority;
+
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.stream.Collectors;
 
 @Log4j2
 public class AuthFilter extends OncePerRequestFilter {
@@ -39,6 +42,8 @@ public class AuthFilter extends OncePerRequestFilter {
 				String username = tokenUtil.getUserNameFromToken(jwtToken);
 				if (username != null) {
 					AppUserDetail userDetails = (AppUserDetail) userService.loadUserByUsername(username);
+					String authorities = userDetails.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.joining());
+					log.info("Authorities granted : " + authorities);
 					if (tokenUtil.isTokenValid(jwtToken, userDetails)) {
 						UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
 								userDetails, null, userDetails.getAuthorities());

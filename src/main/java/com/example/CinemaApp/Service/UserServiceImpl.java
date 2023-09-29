@@ -74,9 +74,20 @@ public class UserServiceImpl implements UserService , UserDetailsService {
         return new AppUserDto(user);
     }
 
+
+
     @Override
     public boolean existsByEmail(String email) {
         return userRepo.existsByEmail(email);
+    }
+
+    @Override
+    public List<TicketDto> getUserTickets() {
+        AppUser user = getCurrentUser();
+        return user.getTickets()
+                .stream()
+                .map(TicketDto::new)
+                .collect(Collectors.toList());
     }
 
 

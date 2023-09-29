@@ -4,9 +4,11 @@ import com.example.CinemaApp.Entity.DailySalesReportDto;
 import com.example.CinemaApp.Entity.MovieStatisticsDto;
 import com.example.CinemaApp.Service.ReportingService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 @RequestMapping("/cinema/movies/{MovieId}")
 public class ReportingController {
 

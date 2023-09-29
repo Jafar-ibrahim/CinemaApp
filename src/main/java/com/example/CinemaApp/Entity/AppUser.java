@@ -31,7 +31,7 @@ public class AppUser {
     @Column(nullable = false)
     private String name;
 
-    @OneToMany(mappedBy = "user"  , fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "user")
     List<Ticket> tickets;
 
     @ManyToMany(fetch = FetchType.EAGER)
@@ -53,12 +53,4 @@ public class AppUser {
         this.id = id;
     }
 
-    @Override
-    public String toString() {
-        return "AppUser{" +
-                "email='" + email + '\'' +
-                ", name='" + name + '\'' +
-                ", tickets=" + tickets +
-                '}';
-    }
 }

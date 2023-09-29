@@ -67,14 +67,14 @@ public class AuthService {
 		}
 
 		Set<Role> userRoles = new HashSet<>();
-		userRoles.add(roleService.findByName("user"));
+		userRoles.add(roleService.findByName("USER"));
 
 		// create a new User entity and set user details
-		AppUser newUser = new AppUser();
-		newUser.setEmail(registrationRequest.getEmail());
-		newUser.setPassword(registrationRequest.getPassword()); // Use a password encoder to hash the password
-		newUser.setName(registrationRequest.getName());
-		newUser.setRoles(userRoles);
+		AppUser newUser =
+				new AppUser(null,registrationRequest.getEmail()
+						,registrationRequest.getPassword()
+						,registrationRequest.getName()
+						,null,userRoles,true,true,true,true);
 
 		log.debug("Valid userDetails credentials.");
 

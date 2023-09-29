@@ -1,6 +1,7 @@
 package com.example.CinemaApp.Config;
 
 import com.example.CinemaApp.Entity.*;
+import com.example.CinemaApp.Security.AppUserDetail;
 import com.example.CinemaApp.Service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDateTime;
 import java.util.*;
 
+@SuppressWarnings("ALL")
 @Component
 @RequiredArgsConstructor
 public class StartUpApp implements CommandLineRunner {
@@ -24,19 +26,19 @@ public class StartUpApp implements CommandLineRunner {
 
 
         if (roleService.findAll().isEmpty()) {
-            roleService.save(new Role(null, "admin"));
-            roleService.save(new Role(null, "user"));
-            roleService.save(new Role(null, "employee"));
+            roleService.save(new Role(null, "ADMIN"));
+            roleService.save(new Role(null, "USER"));
+            roleService.save(new Role(null, "EMPLOYEE"));
         }
 
         Set<Role> adminRoles = new HashSet<>();
-        adminRoles.add(roleService.findByName("admin"));
+        adminRoles.add(roleService.findByName("ADMIN"));
 
         Set<Role> userRoles = new HashSet<>();
-        userRoles.add(roleService.findByName("user"));
+        userRoles.add(roleService.findByName("USER"));
 
         Set<Role>  empRoles = new HashSet<>();
-        empRoles.add(roleService.findByName("employee"));
+        empRoles.add(roleService.findByName("EMPLOYEE"));
 
 
         if (userService.findAll().isEmpty()) {
@@ -65,19 +67,5 @@ public class StartUpApp implements CommandLineRunner {
                 if (x.getMovie() !=null)
                     ticketService.initializeTickets(x);});
         }
-
-        //theaterService.unreserveTicket(2L,3,3);
-        //theaterService.reserveTicket(2L,4,3);
-
-        //Ticket test = ticketService.findByRowNoAndColumnNoAndTheater_Id(1,2,2L);
-
-        //System.out.println(test);
-        //System.out.println(theaterService.findById(2L));
-
-        //System.out.println(userService.findById(1L));
-
-
-
-
     }
 }

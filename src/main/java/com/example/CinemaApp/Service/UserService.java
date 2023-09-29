@@ -21,4 +21,6 @@ public interface UserService extends UserDetailsService {
     AppUserDto getUserProfile();
 
     boolean existsByEmail(String email);
+
+    List<TicketDto> getUserTickets();
 }

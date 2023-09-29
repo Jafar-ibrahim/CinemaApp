@@ -6,7 +6,6 @@ import com.example.CinemaApp.Exception.*;
 import com.example.CinemaApp.Repository.TicketRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
@@ -79,10 +78,6 @@ public class TicketService {
         return new TicketSimpleDto(ticket);
     }
 
-    public List<Ticket> getAvailableTickets() {
-        return ticketRepo.findAllByReservedFalse();
-    }
-
     public Double sumPriceByMovieName(String movieName){
         return ticketRepo.sumPriceByMovieName(movieName);
     }
@@ -107,7 +102,19 @@ public class TicketService {
     }
 
     @Transactional
-    public TicketDto reserveTicket(Long theaterId,int row , int col ){
+    public TicketDto adminReserveTicket(Long theaterId,int row , int col ,Long userId){
+        AppUser user = userService.findById(userId);
+        return reserveTicket(theaterId,row,col,user);
+    }
+
+    @Transactional
+    public TicketDto userReserveTicket(Long theaterId,int row , int col) {
+        AppUser user = userService.getCurrentUser();
+        return reserveTicket(theaterId,row,col,user);
+    }
+
+    @Transactional
+    public TicketDto reserveTicket(Long theaterId,int row , int col , AppUser user){
 
         Theater theater = theaterService.findById(theaterId);
         theaterService.checkIfFull(theater);
@@ -121,12 +128,10 @@ public class TicketService {
         ticket.setReserved(true);
 
         // adding the ticket to the user's list of tickets
-        AppUser user = userService.getCurrentUser();
         ticket.setUser(user);
 
         // adding date of purchase
         ticket.setDateOfPurchase(LocalDateTime.now());
-        //save(ticket);
 
         // adding the ticket price to the movie revenue and increasing
         // number of purchased tickets
@@ -141,12 +146,29 @@ public class TicketService {
     }
 
     @Transactional
-    public void cancelTicketReservation(Long theaterId, int row , int col ){
+    public void adminCancelTicketReservation(Long theaterId , int row , int col){
 
         Theater theater = theaterService.findById(theaterId);
-
         verifyRowsAndCols(row,col,theater.getRowsNumber(),theater.getColumnsNumber());
         Ticket ticket = findByRowNoAndColumnNoAndTheater_Id(row,col , theaterId);
+
+        cancelTicketReservation(theater,ticket);
+    }
+
+    @Transactional
+    public void userCancelTicketReservation(Long ticketId){
+
+        Ticket ticket = getById(ticketId);
+        Theater theater = ticket.getTheater();
+
+        cancelTicketReservation(theater,ticket);
+    }
+
+    @Transactional
+    public void cancelTicketReservation(Theater theater , Ticket ticket){
+
+        //Ticket ticket = getById(ticketId);
+        //Theater theater = ticket.getTheater();
 
         if (!ticket.isReserved())
             throw new TicketNotReservedException();
@@ -158,7 +180,6 @@ public class TicketService {
         ticket.setUser(null);
         // removing date of purchase
         ticket.setDateOfPurchase(null);
-        save(ticket);
 
 
         // removing the ticket price from the movie revenue and decreasing

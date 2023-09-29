@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class TicketDto {
 
-    private Long id;
+    private Long ticketId;
 
     private String movieName;
 
@@ -35,7 +35,7 @@ public class TicketDto {
 
 
     public TicketDto(Ticket ticket){
-        this.id = ticket.getId();
+        this.ticketId = ticket.getId();
         this.movieName = ticket.getMovieName();
         this.seatType = ticket.getSeatType();
         this.theaterId = ticket.getTheater().getId();

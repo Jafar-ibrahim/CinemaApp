@@ -1,8 +1,8 @@
 package com.example.CinemaApp.Service;
 
-import com.example.CinemaApp.Entity.DailySalesReportDto;
+import com.example.CinemaApp.Dto.DailySalesReportDto;
 import com.example.CinemaApp.Entity.Movie;
-import com.example.CinemaApp.Entity.MovieStatisticsDto;
+import com.example.CinemaApp.Dto.MovieStatisticsDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

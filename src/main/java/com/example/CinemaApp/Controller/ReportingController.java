@@ -1,7 +1,7 @@
 package com.example.CinemaApp.Controller;
 
-import com.example.CinemaApp.Entity.DailySalesReportDto;
-import com.example.CinemaApp.Entity.MovieStatisticsDto;
+import com.example.CinemaApp.Dto.DailySalesReportDto;
+import com.example.CinemaApp.Dto.MovieStatisticsDto;
 import com.example.CinemaApp.Service.ReportingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;

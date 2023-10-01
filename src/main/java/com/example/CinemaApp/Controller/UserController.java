@@ -1,7 +1,7 @@
 package com.example.CinemaApp.Controller;
 
-import com.example.CinemaApp.Entity.AppUserDto;
-import com.example.CinemaApp.Entity.TicketDto;
+import com.example.CinemaApp.Dto.AppUserDto;
+import com.example.CinemaApp.Dto.TicketDto;
 import com.example.CinemaApp.Service.TicketService;
 import com.example.CinemaApp.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

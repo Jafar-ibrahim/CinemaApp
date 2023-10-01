@@ -2,9 +2,8 @@ package com.example.CinemaApp.Service;
 
 import com.example.CinemaApp.Entity.AppUser;
 
-import com.example.CinemaApp.Entity.AppUserDto;
-import com.example.CinemaApp.Entity.Ticket;
-import com.example.CinemaApp.Entity.TicketDto;
+import com.example.CinemaApp.Dto.AppUserDto;
+import com.example.CinemaApp.Dto.TicketDto;
 import com.example.CinemaApp.Repository.UserRepo;
 //import com.example.CinemaAPP.Security.AppUserDetail;
 import com.example.CinemaApp.Security.AppUserDetail;
@@ -21,8 +20,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;

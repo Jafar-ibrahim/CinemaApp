@@ -1,5 +1,6 @@
 package com.example.CinemaApp.Service;
 
+import com.example.CinemaApp.Dto.MovieDto;
 import com.example.CinemaApp.Entity.*;
 import com.example.CinemaApp.Repository.MovieRepo;
 import org.springframework.beans.factory.annotation.Autowired;

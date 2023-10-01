@@ -1,5 +1,6 @@
-package com.example.CinemaApp.Entity;
+package com.example.CinemaApp.Dto;
 
+import com.example.CinemaApp.Entity.Movie;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

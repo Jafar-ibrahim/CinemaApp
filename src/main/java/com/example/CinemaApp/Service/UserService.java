@@ -1,8 +1,8 @@
 package com.example.CinemaApp.Service;
 
 import com.example.CinemaApp.Entity.AppUser;
-import com.example.CinemaApp.Entity.AppUserDto;
-import com.example.CinemaApp.Entity.TicketDto;
+import com.example.CinemaApp.Dto.AppUserDto;
+import com.example.CinemaApp.Dto.TicketDto;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 //import org.springframework.security.core.userdetails.UserDetailsService;

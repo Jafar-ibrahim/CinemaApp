@@ -1,5 +1,7 @@
 package com.example.CinemaApp.Service;
 
+import com.example.CinemaApp.Dto.TheaterBoardDto;
+import com.example.CinemaApp.Dto.TheaterDto;
 import com.example.CinemaApp.Entity.*;
 import com.example.CinemaApp.Exception.TheaterHasTicketsException;
 import com.example.CinemaApp.Exception.TheaterIsFullException;

@@ -1,5 +1,7 @@
 package com.example.CinemaApp.Service;
 
+import com.example.CinemaApp.Dto.TicketDto;
+import com.example.CinemaApp.Dto.TicketSimpleDto;
 import com.example.CinemaApp.Entity.*;
 import com.example.CinemaApp.Enum.SeatType;
 import com.example.CinemaApp.Exception.*;
@@ -103,7 +105,7 @@ public class TicketService {
     }
 
     @Transactional
-    public TicketDto adminReserveTicket(Long theaterId,int row , int col ,Long userId){
+    public TicketDto adminReserveTicket(Long theaterId, int row , int col , Long userId){
         AppUser user = userService.findById(userId);
         return reserveTicket(theaterId,row,col,user);
     }

@@ -1,7 +1,7 @@
 # CinemaApp Documentation
 ### CinemaApp is a Spring Boot application that manages cinema-related operations, including user authentication, movie and theater management, ticket reservations, and reporting. This documentation provides an overview of the available endpoints and their functionalities.
 
-**Documentation Link** : https://documenter.getpostman.com/view/29519819/2s9YJgTLMa
+**Documentation(Api Collection) Link** : https://documenter.getpostman.com/view/29519819/2s9YJgTLMa
 
 ## Security
 Authentication and authorization in the CinemaApp are implemented using JSON Web Tokens (JWT). Access to certain endpoints is restricted based on user roles (`ROLE_USER`, `ROLE_ADMIN`). 
